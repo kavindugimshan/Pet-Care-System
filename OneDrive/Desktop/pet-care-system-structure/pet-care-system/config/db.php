@@ -11,7 +11,7 @@
 
 $host        = 'localhost';
 $db_user     = 'root';
-$db_password = '517698';
+$db_password = '';          // XAMPP default: root has no password
 $db_name     = 'pet_care_system';
 
 
