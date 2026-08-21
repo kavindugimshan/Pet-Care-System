@@ -1,4 +1,4 @@
-# Pet Care System
+# Pet Care System Project
 
 University Web Application Development Practical project structure.
 
