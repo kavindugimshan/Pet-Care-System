@@ -1,0 +1,26 @@
+# Windows system files
+*.log
+*.ini
+*.dat
+NTUSER.*
+ntuser.*
+
+# Folders outside project (relative paths going up)
+../../../../*
+../../../*
+../../*
+../*
+
+# IDE & tools
+.vscode/
+.idea/
+.gradle/
+.android/
+.gemini/
+.copilot/
+.cagent/
+.antigravity-ide/
+AppData/
+
+# Local env
+config/db.php

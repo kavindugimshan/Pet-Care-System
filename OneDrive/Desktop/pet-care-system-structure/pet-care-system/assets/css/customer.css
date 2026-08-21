@@ -1,0 +1,592 @@
+/* ================================================================
+   customer.css — Pet Care System
+   Styles for the customer-facing service catalog pages:
+     - index.php    (service catalog)
+     - service-details.php
+   ================================================================ */
+
+/* ── Import shared styles ───────────────────────────────────── */
+/* common.css is already linked in header.php before this file   */
+
+/* ================================================================
+   1. HERO SECTION
+   ================================================================ */
+.hero {
+    background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 50%, #0ea5e9 100%);
+    color: #fff;
+    padding: 4rem 0 3.5rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Decorative background circles */
+.hero::before,
+.hero::after {
+    content: '';
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0.12;
+    background: #fff;
+}
+
+.hero::before {
+    width: 380px;
+    height: 380px;
+    top: -120px;
+    right: -100px;
+}
+
+.hero::after {
+    width: 260px;
+    height: 260px;
+    bottom: -80px;
+    left: -60px;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 1;
+}
+
+.hero-icon {
+    font-size: 3.5rem;
+    line-height: 1;
+    margin-bottom: 0.75rem;
+    display: block;
+    animation: gentle-bounce 3s ease-in-out infinite;
+}
+
+@keyframes gentle-bounce {
+    0%, 100% { transform: translateY(0); }
+    50%       { transform: translateY(-6px); }
+}
+
+.hero-title {
+    font-family: var(--font-heading);
+    font-size: clamp(1.75rem, 4vw, 2.75rem);
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 0.75rem;
+    letter-spacing: -0.02em;
+}
+
+.hero-subtitle {
+    font-size: clamp(0.95rem, 2vw, 1.125rem);
+    color: rgba(255,255,255,0.85);
+    max-width: 560px;
+    margin-inline: auto;
+    line-height: 1.6;
+}
+
+/* ================================================================
+   2. SEARCH & FILTER PANEL
+   ================================================================ */
+.filter-section {
+    background-color: var(--color-surface);
+    border-bottom: 1px solid var(--color-border);
+    padding: 1.5rem 0;
+    box-shadow: var(--shadow-sm);
+}
+
+.filter-form {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr auto auto;
+    gap: 0.75rem;
+    align-items: end;
+}
+
+.filter-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.filter-group label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--color-text-muted);
+    margin-bottom: 0.35rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+/* Search input with icon */
+.search-wrapper {
+    position: relative;
+}
+
+.search-wrapper .search-icon {
+    position: absolute;
+    left: 0.75rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--color-text-light);
+    pointer-events: none;
+    font-size: 1rem;
+}
+
+.search-wrapper input[type="text"] {
+    padding-left: 2.5rem;
+}
+
+/* Filter action buttons */
+.filter-actions {
+    display: flex;
+    gap: 0.5rem;
+    align-items: flex-end;
+}
+
+/* Active filter badge */
+.active-filters {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    padding: 0.75rem 0 0;
+}
+
+.filter-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    background-color: var(--color-primary-light);
+    color: var(--color-primary-dark);
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 0.2rem 0.65rem;
+    border-radius: 9999px;
+}
+
+/* ================================================================
+   3. CATALOG SECTION
+   ================================================================ */
+.catalog-section {
+    padding: 2.5rem 0 3rem;
+}
+
+/* Results summary bar */
+.results-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.results-count {
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+}
+
+.results-count strong {
+    color: var(--color-text);
+    font-weight: 700;
+}
+
+/* ── Service Card Grid ──────────────────────────────────────── */
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+}
+
+/* ── Individual Service Card ────────────────────────────────── */
+.service-card {
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow: var(--shadow-sm);
+    transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+}
+
+.service-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+}
+
+/* Card image */
+.card-image-wrap {
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+    background-color: #f1f5f9;
+    position: relative;
+}
+
+.card-image-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 400ms ease;
+}
+
+.service-card:hover .card-image-wrap img {
+    transform: scale(1.04);
+}
+
+/* Category ribbon */
+.card-category-ribbon {
+    position: absolute;
+    top: 0.75rem;
+    left: 0;
+    background-color: var(--color-primary);
+    color: #fff;
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 0.25rem 0.75rem 0.25rem 0.6rem;
+    border-radius: 0 9999px 9999px 0;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+
+/* Card body */
+.card-body {
+    padding: 1.1rem 1.25rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.card-title {
+    font-family: var(--font-heading);
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--color-text);
+    line-height: 1.3;
+}
+
+/* Meta row (pet type) */
+.card-meta {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-size: 0.8rem;
+    color: var(--color-text-muted);
+    font-weight: 500;
+}
+
+.card-meta .meta-icon {
+    font-size: 0.95rem;
+}
+
+/* Description */
+.card-description {
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+    line-height: 1.55;
+    flex: 1;
+}
+
+/* Price */
+.card-price {
+    font-family: var(--font-heading);
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--color-primary-dark);
+    margin-top: 0.25rem;
+}
+
+/* Card footer buttons */
+.card-footer {
+    padding: 0 1.25rem 1.25rem;
+    display: flex;
+    gap: 0.6rem;
+}
+
+.card-footer .btn {
+    flex: 1;
+    text-align: center;
+    font-size: 0.82rem;
+    padding: 0.55rem 0.5rem;
+}
+
+/* ================================================================
+   4. EMPTY STATE / NO RESULTS
+   ================================================================ */
+.empty-state {
+    text-align: center;
+    padding: 4rem 1rem;
+    grid-column: 1 / -1; /* spans full grid width */
+}
+
+.empty-state-icon {
+    font-size: 4rem;
+    line-height: 1;
+    margin-bottom: 1rem;
+    opacity: 0.5;
+}
+
+.empty-state-title {
+    font-family: var(--font-heading);
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--color-text);
+    margin-bottom: 0.5rem;
+}
+
+.empty-state-message {
+    font-size: 0.95rem;
+    color: var(--color-text-muted);
+    margin-bottom: 1.5rem;
+    max-width: 400px;
+    margin-inline: auto;
+}
+
+/* ================================================================
+   5. SERVICE DETAILS PAGE
+   ================================================================ */
+.details-section {
+    padding: 2.5rem 0 3.5rem;
+}
+
+.details-back {
+    margin-bottom: 1.5rem;
+}
+
+.details-card {
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 460px;
+}
+
+/* Image panel */
+.details-image-panel {
+    position: relative;
+    background-color: #f1f5f9;
+    overflow: hidden;
+}
+
+.details-image-panel img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.details-category-badge {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    background-color: var(--color-primary);
+    color: #fff;
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 0.3rem 0.85rem;
+    border-radius: 9999px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+/* Info panel */
+.details-info-panel {
+    padding: 2.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+.details-title {
+    font-family: var(--font-heading);
+    font-size: clamp(1.4rem, 3vw, 2rem);
+    font-weight: 700;
+    color: var(--color-text);
+    line-height: 1.25;
+}
+
+/* Metadata grid */
+.details-meta-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+}
+
+.details-meta-item {
+    background-color: var(--color-bg);
+    border-radius: var(--radius-md);
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--color-border);
+}
+
+.details-meta-label {
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: var(--color-text-light);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 0.2rem;
+}
+
+.details-meta-value {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--color-text);
+}
+
+/* Description */
+.details-description-label {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 0.4rem;
+}
+
+.details-description-text {
+    font-size: 0.95rem;
+    color: var(--color-text-muted);
+    line-height: 1.7;
+}
+
+/* Price block */
+.details-price-block {
+    background: linear-gradient(135deg, var(--color-primary-light), #eff6ff);
+    border: 1px solid #bfdbfe;
+    border-radius: var(--radius-md);
+    padding: 1rem 1.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.details-price-label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+}
+
+.details-price-value {
+    font-family: var(--font-heading);
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--color-primary-dark);
+}
+
+/* CTA buttons */
+.details-actions {
+    display: flex;
+    gap: 0.75rem;
+    margin-top: auto;
+    flex-wrap: wrap;
+}
+
+.details-actions .btn {
+    flex: 1;
+    min-width: 140px;
+}
+
+/* Not-found / error state */
+.details-not-found {
+    text-align: center;
+    padding: 5rem 1rem;
+    max-width: 480px;
+    margin-inline: auto;
+}
+
+.details-not-found-icon {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+}
+
+.details-not-found-title {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--color-text);
+    margin-bottom: 0.5rem;
+}
+
+.details-not-found-message {
+    color: var(--color-text-muted);
+    font-size: 0.95rem;
+    margin-bottom: 1.5rem;
+}
+
+/* ================================================================
+   6. RESPONSIVE BREAKPOINTS
+   ================================================================ */
+
+/* ── Tablet (≤ 900px) ─────────────────────────────────────── */
+@media (max-width: 900px) {
+    .services-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .filter-form {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .filter-actions {
+        grid-column: 1 / -1;
+        justify-content: flex-start;
+    }
+
+    .details-card {
+        grid-template-columns: 1fr;
+    }
+
+    .details-image-panel {
+        aspect-ratio: 16 / 9;
+        height: 280px;
+    }
+
+    .details-image-panel img {
+        height: 280px;
+    }
+
+    .details-info-panel {
+        padding: 1.75rem;
+    }
+}
+
+/* ── Mobile (≤ 580px) ─────────────────────────────────────── */
+@media (max-width: 580px) {
+    .hero {
+        padding: 2.5rem 0 2rem;
+    }
+
+    .services-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .filter-form {
+        grid-template-columns: 1fr;
+    }
+
+    .filter-actions {
+        grid-column: 1;
+    }
+
+    .card-footer {
+        flex-direction: column;
+    }
+
+    .details-meta-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .details-actions {
+        flex-direction: column;
+    }
+
+    .details-price-block {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.25rem;
+    }
+
+    .details-info-panel {
+        padding: 1.25rem;
+    }
+}
