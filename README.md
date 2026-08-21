@@ -112,3 +112,16 @@ Foreign key relationships:
 services.id → appointments.service_id (RESTRICT / CASCADE)
 appointments.id → payments.appointment_id (CASCADE / CASCADE)
 ```
+Our Website
+<img width="1884" height="881" alt="image" src="https://github.com/user-attachments/assets/6142190d-21f4-4002-83a8-7632094e137a" />
+<img width="1884" height="881" alt="image" src="https://github.com/user-attachments/assets/a597c08f-2366-48f6-bde2-7dbe15b5043b" />
+<img width="1884" height="881" alt="image" src="https://github.com/user-attachments/assets/fd96ec4a-f64a-4ff2-9e58-b4a9e939ff3c" />
+<img width="1884" height="881" alt="image" src="https://github.com/user-attachments/assets/75d5efb9-e566-4c75-b87f-a4a32dce0b71" />
+<img width="1884" height="881" alt="image" src="https://github.com/user-attachments/assets/017587db-d739-442e-95f5-c1d5987a4549" />
+<img width="1884" height="881" alt="image" src="https://github.com/user-attachments/assets/07e2e42f-3aa6-4b61-a2c0-c6fe3f87a907" />
+
+
+
+
+
+
