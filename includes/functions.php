@@ -2,17 +2,11 @@
 // ============================================================
 // Pet Care System - Shared Helper Functions
 // University Web Application Development Project
-// Member 1: Core Auth
-//
-// Usage: require_once '/path/to/includes/functions.php';
 // ============================================================
 
 /**
- * Sanitize user input to prevent XSS when output in HTML.
- * Use on any user-supplied string before echoing it to the page.
- *
- * @param  string $input  The raw input string.
- * @return string         HTML-safe string.
+ * Sanitize a string for safe HTML output (XSS prevention).
+ * Primary function — used by Member 1 code.
  */
 function sanitizeInput(string $input): string
 {
@@ -20,11 +14,16 @@ function sanitizeInput(string $input): string
 }
 
 /**
- * Format a numeric value as a Sri Lankan Rupee price string.
+ * Alias of sanitizeInput() — used by Member 2 (service-details.php).
+ */
+function sanitize(string $input): string
+{
+    return htmlspecialchars(trim($input), ENT_QUOTES, 'UTF-8');
+}
+
+/**
+ * Format a float as a Sri Lankan Rupee price.
  * Example: formatPrice(3500) → "Rs. 3,500.00"
- *
- * @param  float  $amount  The price amount.
- * @return string          Formatted price string.
  */
 function formatPrice(float $amount): string
 {
@@ -32,11 +31,7 @@ function formatPrice(float $amount): string
 }
 
 /**
- * Redirect to a given URL and stop script execution.
- * Supports relative paths from the document root.
- *
- * @param  string $url  The destination URL or path.
- * @return void
+ * Redirect to a URL and stop execution.
  */
 function redirect(string $url): void
 {
@@ -45,11 +40,7 @@ function redirect(string $url): void
 }
 
 /**
- * Return a query-string parameter value safely, or a default.
- *
- * @param  string $key      The $_GET key to read.
- * @param  string $default  Value to return if the key is absent.
- * @return string
+ * Return a sanitized GET parameter or a default value.
  */
 function getQueryParam(string $key, string $default = ''): string
 {
@@ -57,16 +48,13 @@ function getQueryParam(string $key, string $default = ''): string
 }
 
 /**
- * Display a session flash message if one is set, then clear it.
- * Accepts 'success', 'error', or 'info' as the message type.
- *
- * @param  string $key  The session key that holds the flash message.
- * @return void
+ * Display a session flash message if set, then clear it.
+ * $key can be 'success', 'error', or 'info'.
  */
 function showFlash(string $key): void
 {
     if (!empty($_SESSION[$key])) {
-        $type    = ($key === 'success') ? 'success' : (($key === 'error') ? 'error' : 'info');
+        $type    = in_array($key, ['success', 'error', 'info', 'warning']) ? $key : 'info';
         $message = sanitizeInput($_SESSION[$key]);
         echo '<div class="alert alert-' . $type . '">' . $message . '</div>';
         unset($_SESSION[$key]);
@@ -74,9 +62,7 @@ function showFlash(string $key): void
 }
 
 /**
- * Check whether the current admin session is active.
- *
- * @return bool
+ * Check whether an admin session is active.
  */
 function isAdminLoggedIn(): bool
 {
@@ -84,11 +70,7 @@ function isAdminLoggedIn(): bool
 }
 
 /**
- * Truncate a string to a maximum length and append ellipsis if needed.
- *
- * @param  string $text    The input string.
- * @param  int    $length  Maximum number of characters.
- * @return string
+ * Truncate a string to $length characters with ellipsis.
  */
 function truncateText(string $text, int $length = 100): string
 {
@@ -96,4 +78,21 @@ function truncateText(string $text, int $length = 100): string
         return $text;
     }
     return mb_substr($text, 0, $length) . '…';
+}
+
+/**
+ * Resolve a service image path for display.
+ * Used by service-details.php (Member 2).
+ *
+ * @param  string $image     The image filename stored in DB (e.g. "dog-grooming.jpg")
+ * @param  string $basePath  Path prefix from current directory to root (e.g. "" or "../")
+ * @return string            Full relative path to the image src
+ */
+function resolveServiceImage(string $image, string $basePath = ''): string
+{
+    if (empty(trim($image))) {
+        return $basePath . 'assets/images/placeholder.svg';
+    }
+    $imagePath = $basePath . 'assets/images/' . basename($image);
+    return $imagePath;
 }
