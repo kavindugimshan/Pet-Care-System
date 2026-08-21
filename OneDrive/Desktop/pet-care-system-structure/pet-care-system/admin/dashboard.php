@@ -1,10 +1,10 @@
-﻿<?php
+<?php
 // ============================================================
 // Pet Care System - Admin Dashboard
 // University Web Application Development Project
 // Member 1: Core Auth
 //
-// Protected page ΓÇö requires a valid admin session.
+// Protected page — requires a valid admin session.
 // ============================================================
 
 // Session guard (redirects to login if not authenticated)
@@ -14,7 +14,7 @@ require_once '../includes/auth.php';
 require_once '../config/db.php';
 require_once '../includes/functions.php';
 
-// ΓöÇΓöÇ Fetch Dashboard Statistics ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+// ── Fetch Dashboard Statistics ─────────────────────────────
 // Helper: safely run a COUNT query and return the integer result
 function fetchCount(mysqli $conn, string $sql): int
 {
@@ -52,41 +52,42 @@ $pageTitle = 'Dashboard';
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
     <link rel="stylesheet" href="../assets/css/common.css">
     <link rel="stylesheet" href="../assets/css/admin.css">
 </head>
 <body>
 
-<!-- ΓöÇΓöÇ Admin Layout ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ -->
+<!-- ── Admin Layout ─────────────────────────────────────── -->
 <div class="admin-layout">
 
     <!-- Sidebar Navigation -->
     <aside class="admin-sidebar">
-        <div class="admin-sidebar-title">≡ƒÉ╛ PCS Admin</div>
+        <div class="admin-sidebar-title"><i class="fa-solid fa-paw"></i> PCS Admin</div>
         <nav>
             <ul>
                 <li>
                     <a href="dashboard.php" class="active">
-                        ≡ƒôè Dashboard
+                        <i class="fa-solid fa-gauge"></i> Dashboard
                     </a>
                 </li>
                 <li>
-                    <!-- Member 4 will implement the logic for this page -->
                     <a href="services.php">
-                        ≡ƒ¢Ä∩╕Å Manage Services
+                        <i class="fa-solid fa-list-check"></i> Manage Services
                     </a>
                 </li>
                 <li>
-                    <!-- Member 4 will implement the logic for this page -->
                     <a href="appointments.php">
-                        ≡ƒôà Appointments
+                        <i class="fa-solid fa-calendar-days"></i> Appointments
                     </a>
                 </li>
             </ul>
         </nav>
         <div class="admin-sidebar-footer">
             <a href="logout.php" class="btn btn-danger btn-sm btn-full" id="logoutBtn">
-                ≡ƒöÆ Logout
+                <i class="fa-solid fa-right-from-bracket"></i> Logout
             </a>
         </div>
     </aside>
@@ -106,7 +107,7 @@ $pageTitle = 'Dashboard';
                 </p>
             </div>
             <a href="logout.php" class="btn btn-secondary btn-sm" id="headerLogoutBtn">
-                ≡ƒöÆ Logout
+                <i class="fa-solid fa-right-from-bracket"></i> Logout
             </a>
         </div>
 
@@ -119,7 +120,7 @@ $pageTitle = 'Dashboard';
 
                 <!-- Total Services -->
                 <div class="stat-card">
-                    <div class="stat-icon">≡ƒ¢Ä∩╕Å</div>
+                    <div class="stat-icon"><i class="fa-solid fa-list-check"></i></div>
                     <div class="stat-number" id="statServices">
                         <?php echo $totalServices; ?>
                     </div>
@@ -128,7 +129,7 @@ $pageTitle = 'Dashboard';
 
                 <!-- Total Appointments -->
                 <div class="stat-card stat-card--accent">
-                    <div class="stat-icon">≡ƒôà</div>
+                    <div class="stat-icon"><i class="fa-solid fa-calendar-days"></i></div>
                     <div class="stat-number" id="statAppointments">
                         <?php echo $totalAppointments; ?>
                     </div>
@@ -137,7 +138,7 @@ $pageTitle = 'Dashboard';
 
                 <!-- Paid Bookings -->
                 <div class="stat-card stat-card--success">
-                    <div class="stat-icon">Γ£à</div>
+                    <div class="stat-icon"><i class="fa-solid fa-circle-check"></i></div>
                     <div class="stat-number" id="statPaid">
                         <?php echo $paidBookings; ?>
                     </div>
@@ -146,7 +147,7 @@ $pageTitle = 'Dashboard';
 
                 <!-- Pending Payments -->
                 <div class="stat-card stat-card--error">
-                    <div class="stat-icon">ΓÅ│</div>
+                    <div class="stat-icon"><i class="fa-solid fa-clock"></i></div>
                     <div class="stat-number" id="statPending">
                         <?php echo $pendingPayments; ?>
                     </div>
@@ -164,25 +165,23 @@ $pageTitle = 'Dashboard';
             <div class="stats-grid" style="grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));">
 
                 <div class="card">
-                    <div class="card-title">≡ƒ¢Ä∩╕Å Services</div>
+                    <div class="card-title"><i class="fa-solid fa-list-check"></i> Services</div>
                     <p class="text-muted text-sm mb-md">
                         Add, edit, or remove pet care services available to customers.
                     </p>
-                    <!-- Member 4 implements this page -->
                     <a href="services.php" class="btn btn-primary btn-sm">Manage Services</a>
                 </div>
 
                 <div class="card">
-                    <div class="card-title">≡ƒôà Appointments</div>
+                    <div class="card-title"><i class="fa-solid fa-calendar-days"></i> Appointments</div>
                     <p class="text-muted text-sm mb-md">
                         Review and update the status of customer appointment bookings.
                     </p>
-                    <!-- Member 4 implements this page -->
                     <a href="appointments.php" class="btn btn-primary btn-sm">View Appointments</a>
                 </div>
 
                 <div class="card">
-                    <div class="card-title">≡ƒîÉ Public Site</div>
+                    <div class="card-title"><i class="fa-solid fa-globe"></i> Public Site</div>
                     <p class="text-muted text-sm mb-md">
                         View the customer-facing website with the service catalog.
                     </p>
