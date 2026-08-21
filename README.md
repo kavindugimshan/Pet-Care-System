@@ -1,160 +1,56 @@
-# 🐾 Pet Care System
+# Pet Care System Project
 
-**University Web Application Development Project**
+University Web Application Development Practical project structure.
 
-A fully integrated, database-backed Pet Care System supporting customer bookings and admin management.
-
----
-
-## Project Overview
-
-The Pet Care System is a multi-module web application that allows pet owners to browse services, book appointments, and complete simulated payments — while administrators manage the service catalog, monitor bookings, and view payment statuses.
+Tech stack: HTML, CSS, Vanilla JavaScript, PHP, MySQL.
 
 ---
 
-## Features
+## Member 1 — Setup Instructions (Core Auth)
 
-### Pet Owner
-- Browse pet care services catalog
-- Search by service name
-- Filter by service category
-- Filter by pet type
-- View detailed service information
-- Book a service with pet and owner details
-- Complete a simulated demo payment
-- View booking confirmation with transaction reference
+### 1. Database Setup
 
-### Administrator
-- Secure login with hashed passwords
-- Admin dashboard with live statistics
-- Create / Read / Update / Delete services
-- View all customer appointments
-- Monitor booking status and payment status
-- Secure session-based authentication
-- Protected logout
-
----
-
-## Technologies Used
-
-| Layer    | Technology |
-|----------|-----------|
-| Frontend | HTML5, CSS3, Vanilla JavaScript |
-| Backend  | PHP (Procedural) |
-| Database | MySQL (mysqli) |
-| Version Control | Git / GitHub |
-
-No frameworks (no Laravel, Bootstrap, React, etc.)
-
----
-
-## Project Structure
-
-```
-pet-care-system/
-├── index.php                    # Customer service catalog
-├── service-details.php          # Service detail view
-│
-├── config/
-│   └── db.php                   # Database connection
-│
-├── database/
-│   ├── pet_care.sql             # Full schema + sample data
-│   └── seed_admin.php           # Demo admin seeder
-│
-├── includes/
-│   ├── header.php               # Shared page header
-│   ├── footer.php               # Shared page footer
-│   ├── functions.php            # Helper functions
-│   └── auth.php                 # Session guard
-│
-├── customer/
-│   ├── booking.php              # Booking form
-│   ├── process_booking.php      # Booking handler
-│   ├── payment.php              # Simulated payment
-│   ├── process_payment.php      # Payment handler
-│   └── booking-success.php      # Confirmation
-│
-├── admin/
-│   ├── login.php                # Admin login
-│   ├── authenticate.php         # Login handler
-│   ├── logout.php               # Session destroy
-│   ├── dashboard.php            # Dashboard & stats
-│   ├── services.php             # Service list
-│   ├── service-add.php          # Add service
-│   ├── service-edit.php         # Edit service
-│   ├── service-delete.php       # Delete handler
-│   └── appointments.php         # Appointments view
-│
-└── assets/
-    ├── css/
-    │   ├── common.css           # Shared design system
-    │   ├── customer.css         # Catalog styles
-    │   ├── booking.css          # Booking/payment styles
-    │   └── admin.css            # Admin styles
-    ├── js/
-    │   ├── catalog.js           # Catalog UX
-    │   ├── booking.js           # Booking/payment UX
-    │   └── admin.js             # Admin UX
-    └── images/
-        └── placeholder.svg      # Fallback image
-```
-
----
-
-## Database Setup
-
-### 1. Import the schema and sample data
+Import the database schema (creates the database + all tables + sample services):
 
 ```bash
 mysql -u root -p < database/pet_care.sql
 ```
 
-This creates the `pet_care_system` database with all 4 tables and 5 sample services.
+### 2. Configure the Database Connection
 
-### 2. Configure the connection
-
-Edit **`config/db.php`** and update these variables:
+Edit `config/db.php` and update these four variables to match your local environment:
 
 ```php
 $host        = 'localhost';
 $db_user     = 'root';
-$db_password = 'your_password';   // change this
+$db_password = '';        // your MySQL password
 $db_name     = 'pet_care_system';
 ```
 
----
+### 3. Seed the Demo Admin Account
 
-## Admin Setup
+Run the seeder once to create the hashed admin record:
 
-### Seed the demo administrator
+```bash
+php -S localhost:8000
+```
 
-Start the server (see below), then visit:
+Then visit in your browser:
 
 ```
 http://localhost:8000/database/seed_admin.php
 ```
 
-Or run via CLI:
+### 4. Demo Admin Credentials
 
-```bash
-php database/seed_admin.php
-```
-
-### Demo Admin Credentials
-
-> ⚠️ **For coursework / demo purposes only. Do not use in production.**
+> **For coursework / demo purposes only. Never use in production.**
 
 | Field    | Value      |
 |----------|------------|
 | Username | `admin`    |
 | Password | `admin123` |
 
-Passwords are stored as bcrypt hashes (`password_hash()` / `password_verify()`). The plain-text password is never stored.
-
----
-
-## Running the Project
+### 5. Run the Development Server
 
 From the project root:
 
@@ -162,79 +58,57 @@ From the project root:
 php -S localhost:8000
 ```
 
----
+### 6. Access the Application
 
-## Application URLs
+| Page              | URL                                          |
+|-------------------|----------------------------------------------|
+| Home / Catalog    | http://localhost:8000/index.php              |
+| Admin Login       | http://localhost:8000/admin/login.php        |
+| Admin Dashboard   | http://localhost:8000/admin/dashboard.php    |
+| Admin Seed Script | http://localhost:8000/database/seed_admin.php |
 
-| Page                | URL |
-|---------------------|-----|
-| Customer Catalog    | http://localhost:8000/ |
-| Service Details     | http://localhost:8000/service-details.php?id=1 |
-| Book a Service      | http://localhost:8000/customer/booking.php?service_id=1 |
-| Admin Login         | http://localhost:8000/admin/login.php |
-| Admin Dashboard     | http://localhost:8000/admin/dashboard.php |
+### 7. Testing Admin Login
 
----
-
-## Payment Notice
-
-The payment system is a **simulated demo** for coursework purposes.
-
-- No real financial transaction occurs
-- No real card number, CVV, or PIN is stored or transmitted
-- The "card number" input field is purely cosmetic and is not submitted to the server
-- Transaction references are generated server-side (e.g. `PAY-20260821-153045-A8F4`)
+1. Start the PHP server: `php -S localhost:8000`
+2. Import the SQL: `mysql -u root -p < database/pet_care.sql`
+3. Seed the admin: visit `http://localhost:8000/database/seed_admin.php`
+4. Go to `http://localhost:8000/admin/login.php`
+5. Log in with `admin` / `admin123`
+6. Verify the dashboard shows **5 services**, **0 appointments**, etc.
+7. Click Logout and confirm you are returned to the login page.
+8. Try accessing `http://localhost:8000/admin/dashboard.php` directly — you should be redirected to login.
 
 ---
 
-## Database Schema
+## Branch Strategy
 
-| Table         | Key Columns |
-|---------------|-------------|
-| `admins`      | id, username, password (bcrypt hash) |
-| `services`    | id, service_name, category, target_pet_type, description, price, image |
-| `appointments`| id, service_id (FK), customer_name, email, phone, pet_name, breed, age, appointment_date, booking_status |
-| `payments`    | id, appointment_id (FK), amount, payment_method, transaction_reference, payment_status, paid_at |
-
-Foreign keys:
-- `appointments.service_id → services.id` (RESTRICT / CASCADE)
-- `payments.appointment_id → appointments.id` (CASCADE / CASCADE)
+| Branch                  | Responsibility             |
+|-------------------------|----------------------------|
+| `main`                  | Final stable release       |
+| `development`           | Integration branch         |
+| `member1-core-auth`     | Member 1 — Auth & Database |
+| `member2-service-catalog` | Member 2 — Customer catalog |
+| `member3-booking-payment` | Member 3 — Booking & payment |
+| `member4-admin-management` | Member 4 — Admin management |
 
 ---
 
-## Team Contributions
+## Database Contract (All Members)
 
-| Member   | Branch                      | Responsibilities |
-|----------|-----------------------------|-----------------|
-| Member 1 | `member1-core-auth`         | Database schema, connection, shared helpers, header/footer, admin auth, dashboard |
-| Member 2 | `member2-service-catalog`   | Service catalog, search, filters, service details |
-| Member 3 | `member3-booking-payment`   | Booking form, payment simulation, confirmation |
-| Member 4 | `member4-admin-management`  | Admin service CRUD, appointment monitoring |
-
----
-
-## Git Branches
+The following table/column names must **not** be renamed:
 
 ```
-main                      ← Final stable
-development               ← Integration
-member1-core-auth
-member2-service-catalog
-member3-booking-payment
-member4-admin-management
+admins          → id, username, password, created_at
+services        → id, service_name, category, target_pet_type, description, price, image
+appointments    → id, service_id, customer_name, customer_email, customer_phone,
+                   pet_name, breed, age, appointment_date, booking_status, created_at
+payments        → id, appointment_id, amount, payment_method, transaction_reference,
+                   payment_status, paid_at
 ```
 
----
+Foreign key relationships:
 
-## Quick Test Flow
-
-1. Import SQL → Seed admin → Start server
-2. Go to `http://localhost:8000/` — catalog loads
-3. Search "Grooming" — filtered results
-4. Click **Book Now** → fill form → submit
-5. Select payment method → Confirm Payment
-6. Confirmation page shows booking details
-7. Go to `http://localhost:8000/admin/login.php`
-8. Login: `admin` / `admin123`
-9. Dashboard shows updated statistics
-10. Appointments page shows the booking as **Confirmed / Paid**
+```
+services.id → appointments.service_id (RESTRICT / CASCADE)
+appointments.id → payments.appointment_id (CASCADE / CASCADE)
+```
