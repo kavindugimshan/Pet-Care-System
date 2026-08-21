@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 280" fill="none">
+  <rect width="400" height="280" fill="#f1f5f9"/>
+  <!-- Paw print background -->
+  <circle cx="200" cy="110" r="52" fill="#dbeafe"/>
+  <!-- Paw pad -->
+  <ellipse cx="200" cy="120" rx="22" ry="18" fill="#93c5fd"/>
+  <!-- Toe pads -->
+  <circle cx="182" cy="100" r="9" fill="#93c5fd"/>
+  <circle cx="200" cy="95"  r="9" fill="#93c5fd"/>
+  <circle cx="218" cy="100" r="9" fill="#93c5fd"/>
+  <circle cx="172" cy="112" r="7" fill="#93c5fd"/>
+  <circle cx="228" cy="112" r="7" fill="#93c5fd"/>
+  <!-- Label -->
+  <text x="200" y="195" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="15" font-weight="600" fill="#64748b">No Image Available</text>
+  <text x="200" y="215" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="12" fill="#94a3b8">Pet Care System</text>
+</svg>
