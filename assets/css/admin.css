@@ -1,0 +1,67 @@
+/* ================================================================
+   admin.css — Pet Care System
+   Additional admin-specific styles that extend common.css
+   ================================================================ */
+
+/* Required asterisk */
+.required { color: var(--clr-error); }
+
+/* Form row for side-by-side fields */
+.form-row {
+    display:               grid;
+    grid-template-columns: 1fr 1fr;
+    gap:                   1rem;
+}
+
+/* Service image thumbnail in table */
+.service-thumb {
+    width:         48px;
+    height:        48px;
+    object-fit:    cover;
+    border-radius: var(--radius-sm);
+    border:        1px solid var(--clr-border);
+}
+
+/* Dashboard date display */
+.dashboard-date {
+    font-size:   var(--font-size-sm);
+    color:       var(--clr-text-muted);
+    margin-top:  0.25rem;
+}
+
+/* Empty table state */
+.table-empty {
+    text-align: center;
+    padding:    3rem 1rem;
+    color:      var(--clr-text-muted);
+}
+
+/* Appointment count ring */
+.count-ring {
+    display:         inline-flex;
+    align-items:     center;
+    justify-content: center;
+    width:           28px;
+    height:          28px;
+    background:      var(--clr-primary-lt);
+    color:           var(--clr-primary);
+    border-radius:   50%;
+    font-size:       0.8rem;
+    font-weight:     700;
+}
+
+/* Flash message auto-clear animation */
+.alert {
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-8px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Responsive table tweaks */
+@media (max-width: 900px) {
+    .form-row { grid-template-columns: 1fr; }
+    td, th { white-space: nowrap; }
+}
