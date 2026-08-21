@@ -192,8 +192,8 @@ require_once __DIR__ . '/includes/header.php';
                 <?php foreach ($services as $service):
                     $imgSrc  = 'assets/images/' . ($service['image'] ? basename($service['image']) : 'placeholder.svg');
                     $petIcon = match(strtolower(trim($service['target_pet_type']))) {
-                        'dog'   => '🐕',
-                        'cat'   => '🐈',
+                        'Dog'   => '🐕',
+                        'Cat'   => '🐈',
                         default => '🐾',
                     };
                 ?>
