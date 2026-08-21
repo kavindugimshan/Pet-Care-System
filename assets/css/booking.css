@@ -1,0 +1,282 @@
+/* ================================================================
+   booking.css — Pet Care System
+   Styles for:
+     - customer/booking.php
+     - customer/payment.php
+     - customer/booking-success.php
+   ================================================================ */
+
+/* ── Booking Page Layout ──────────────────────────────────────── */
+.booking-wrapper,
+.payment-wrapper,
+.success-wrapper {
+    padding: 2.5rem 0 3.5rem;
+}
+
+.booking-layout,
+.payment-layout {
+    display:               grid;
+    grid-template-columns: 1fr 360px;
+    gap:                   2rem;
+    align-items:           start;
+}
+
+/* ── Form Card ────────────────────────────────────────────────── */
+.booking-form-card,
+.payment-form-card {
+    background:    var(--clr-white);
+    border:        1px solid var(--clr-border);
+    border-radius: var(--radius-xl);
+    box-shadow:    var(--shadow-md);
+    padding:       2rem;
+}
+
+.booking-form-title,
+.payment-form-title {
+    font-size:     1.5rem;
+    font-weight:   800;
+    color:         var(--clr-text);
+    margin-bottom: 0.35rem;
+}
+
+.booking-form-subtitle {
+    color:         var(--clr-text-muted);
+    font-size:     0.9rem;
+    margin-bottom: 1.5rem;
+}
+
+/* Fieldset / legend */
+.booking-fieldset {
+    border:        none;
+    margin-bottom: 1.5rem;
+    padding:       0;
+}
+
+.booking-legend {
+    font-size:     0.85rem;
+    font-weight:   700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color:         var(--clr-text-muted);
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--clr-border);
+    width:         100%;
+}
+
+/* Two-column row */
+.form-row {
+    display:               grid;
+    grid-template-columns: 1fr 1fr;
+    gap:                   1rem;
+}
+
+/* Required star */
+.required { color: var(--clr-error); margin-left: 2px; }
+
+/* ── Summary / Sidebar Card ───────────────────────────────────── */
+.booking-summary-section,
+.payment-summary-section {
+    position: sticky;
+    top:      84px;
+}
+
+.booking-summary-card {
+    background:    var(--clr-white);
+    border:        1px solid var(--clr-border);
+    border-radius: var(--radius-xl);
+    box-shadow:    var(--shadow-md);
+    padding:       1.75rem;
+    border-top:    4px solid var(--clr-primary);
+}
+
+.booking-summary-title {
+    font-size:     1rem;
+    font-weight:   700;
+    color:         var(--clr-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--clr-border);
+}
+
+.summary-service-name {
+    font-size:     1.2rem;
+    font-weight:   800;
+    color:         var(--clr-text);
+    margin-bottom: 1rem;
+    line-height:   1.3;
+}
+
+.summary-row {
+    display:         flex;
+    justify-content: space-between;
+    align-items:     center;
+    padding:         0.5rem 0;
+    border-bottom:   1px solid var(--clr-border);
+    font-size:       0.875rem;
+}
+
+.summary-row:last-of-type { border-bottom: none; }
+
+.summary-label { color: var(--clr-text-muted); font-weight: 500; }
+.summary-value { font-weight: 600; color: var(--clr-text); text-align: right; }
+
+.summary-price-row {
+    display:         flex;
+    justify-content: space-between;
+    align-items:     center;
+    margin-top:      1rem;
+    padding:         1rem;
+    background:      var(--clr-primary-lt);
+    border-radius:   var(--radius-md);
+    border:          1px solid #bfdbfe;
+}
+
+.summary-price-label {
+    font-size:   0.8rem;
+    font-weight: 700;
+    color:       var(--clr-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.summary-price-value {
+    font-size:   1.4rem;
+    font-weight: 800;
+    color:       var(--clr-primary-dk);
+}
+
+/* ── Payment Method Form ──────────────────────────────────────── */
+#cardFields { margin-top: 1rem; }
+
+/* ── Booking Confirmation / Success Page ──────────────────────── */
+.success-header {
+    text-align:    center;
+    padding:       2.5rem 1rem 2rem;
+}
+
+.success-icon {
+    font-size:     4rem;
+    line-height:   1;
+    margin-bottom: 1rem;
+    display:       block;
+}
+
+.success-title {
+    font-size:     2rem;
+    font-weight:   800;
+    color:         var(--clr-text);
+    margin-bottom: 0.5rem;
+}
+
+.success-subtitle {
+    font-size:  1rem;
+    color:      var(--clr-text-muted);
+    max-width:  520px;
+    margin:     0 auto;
+}
+
+.confirmation-card {
+    background:    var(--clr-white);
+    border:        1px solid var(--clr-border);
+    border-radius: var(--radius-xl);
+    box-shadow:    var(--shadow-lg);
+    overflow:      hidden;
+    max-width:     900px;
+    margin:        0 auto 3rem;
+}
+
+.confirmation-ref-bar {
+    background:      var(--clr-nav-bg);
+    color:           var(--clr-white);
+    display:         flex;
+    align-items:     center;
+    justify-content: space-between;
+    padding:         1rem 2rem;
+}
+
+.ref-label { font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; opacity: 0.7; }
+.ref-number { font-size: 1.5rem; font-weight: 800; color: var(--clr-accent); }
+
+.confirmation-grid {
+    display:               grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap:                   0;
+}
+
+.confirmation-section {
+    padding:      1.75rem;
+    border-right: 1px solid var(--clr-border);
+}
+
+.confirmation-section:last-child { border-right: none; }
+.confirmation-section.confirmation-payment { border-right: none; }
+
+.confirmation-section-title {
+    font-size:     0.8rem;
+    font-weight:   700;
+    color:         var(--clr-primary);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--clr-border);
+}
+
+.confirmation-row {
+    display:         flex;
+    justify-content: space-between;
+    align-items:     flex-start;
+    gap:             0.75rem;
+    padding:         0.5rem 0;
+    border-bottom:   1px solid var(--clr-border);
+    font-size:       0.875rem;
+}
+
+.confirmation-row:last-child { border-bottom: none; }
+
+.conf-label { color: var(--clr-text-muted); font-weight: 500; flex-shrink: 0; }
+.conf-value { font-weight: 600; color: var(--clr-text); text-align: right; word-break: break-all; }
+.conf-amount { font-size: 1.1rem; color: var(--clr-primary-dk); font-weight: 800; }
+.conf-ref { font-size: 0.75rem; font-family: monospace; }
+
+.confirmation-actions {
+    padding:         1.5rem 2rem;
+    border-top:      1px solid var(--clr-border);
+    display:         flex;
+    gap:             1rem;
+    justify-content: center;
+    flex-wrap:       wrap;
+    background:      var(--clr-bg);
+}
+
+/* ── Responsive ───────────────────────────────────────────────── */
+@media (max-width: 900px) {
+    .booking-layout,
+    .payment-layout {
+        grid-template-columns: 1fr;
+    }
+    .booking-summary-section,
+    .payment-summary-section {
+        position: static;
+        order: -1;
+    }
+    .confirmation-grid {
+        grid-template-columns: 1fr;
+    }
+    .confirmation-section {
+        border-right: none;
+        border-bottom: 1px solid var(--clr-border);
+    }
+    .confirmation-section:last-child { border-bottom: none; }
+}
+
+@media (max-width: 580px) {
+    .form-row { grid-template-columns: 1fr; }
+    .booking-form-card,
+    .payment-form-card { padding: 1.25rem; }
+    .confirmation-ref-bar { flex-direction: column; gap: 0.5rem; text-align: center; }
+    .confirmation-actions { padding: 1rem; }
+}
