@@ -1,33 +1,31 @@
 <?php
-/**
- * Database Connection
- * Pet Care System
- *
- * Provides a MySQLi connection ($conn) to the pet_care_system database.
- * Include this file at the top of any page that needs database access.
- *
- * Usage:
- *   require_once __DIR__ . '/../config/db.php';
- *   // $conn is now available
- */
+// ============================================================
+// Pet Care System - Database Connection
+// University Web Application Development Project
+// Member 1: Core Auth
+//
+// Usage: require_once '/path/to/config/db.php';
+//        Then use $conn for all queries.
+// ============================================================
 
-// ── Database credentials ──────────────────────────────────────────────────────
-define('DB_HOST',    'localhost');
-define('DB_USER',    'root');
-define('DB_PASS',    '');
-define('DB_NAME',    'pet_care_system');
-define('DB_CHARSET', 'utf8mb4');
-// ─────────────────────────────────────────────────────────────────────────────
+// ── Edit these values to match your local environment ──────
+$host        = 'localhost';
+$db_user     = 'root';
+$db_password = 'Awzplocha#2003';
+$db_name     = 'pet_care_system';
+// ───────────────────────────────────────────────────────────
 
-// Enable MySQLi to throw exceptions on errors (no raw error messages to users).
-mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
+// Create the connection
+$conn = new mysqli($host, $db_user, $db_password, $db_name);
 
-try {
-    $conn = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
-    $conn->set_charset(DB_CHARSET);
-} catch (mysqli_sql_exception $e) {
-    // Log the real error server-side; show nothing sensitive to the user.
-    error_log('Database connection failed: ' . $e->getMessage());
-    http_response_code(503);
-    die('Unable to connect to the database. Please try again later.');
+// Check for connection errors
+if ($conn->connect_error) {
+    // Log the detailed error server-side; show a generic message to the user
+    error_log('Database connection failed: ' . $conn->connect_error);
+    die('A database error occurred. Please try again later.');
+}
+
+// Set the character set to utf8mb4 (supports full Unicode including emoji)
+if (!$conn->set_charset('utf8mb4')) {
+    error_log('Failed to set charset utf8mb4: ' . $conn->error);
 }

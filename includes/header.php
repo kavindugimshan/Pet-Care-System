@@ -1,85 +1,89 @@
 <?php
-/**
- * Shared Header Include
- * Pet Care System
- *
- * Outputs the HTML <head> block and the site navigation bar.
- *
- * Variables that can be set before including this file:
- *   $pageTitle  (string) — used in <title> tag, defaults to "Pet Care System"
- *   $basePath   (string) — relative path prefix for assets/links (e.g. '../')
- *                          defaults to '' (for files in the project root)
- */
+// ============================================================
+// Pet Care System - Common Header
+// University Web Application Development Project
+// Member 1: Core Auth
+//
+// Include at the top of every public-facing page:
+//   require_once '/path/to/includes/header.php';
+//
+// The $pageTitle variable can be set before including this file
+// to customise the browser tab title:
+//   $pageTitle = 'Book a Service';
+//   require_once '../includes/header.php';
+// ============================================================
 
-$pageTitle = isset($pageTitle) ? trim($pageTitle) : '';
-$basePath  = isset($basePath)  ? $basePath         : '';
+// Determine a base URL that works regardless of calling directory.
+// Assumes the server is running from the project root.
+$base = '/';
+
+// Determine the current script path for nav highlighting
+$currentPage = basename($_SERVER['PHP_SELF']);
+
+// Use a custom title if set by the calling page, otherwise default
 $siteTitle = 'Pet Care System';
-$fullTitle = $pageTitle !== '' ? $pageTitle . ' | ' . $siteTitle : $siteTitle;
-
-// Determine the active nav link based on the current script.
-$currentScript = basename($_SERVER['PHP_SELF']);
+$pageTitle  = isset($pageTitle) ? $pageTitle . ' | ' . $siteTitle : $siteTitle;
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Pet Care System — professional grooming, veterinary and boarding services for your beloved pets.">
-    <title><?= htmlspecialchars($fullTitle, ENT_QUOTES, 'UTF-8') ?></title>
+    <meta name="description" content="Pet Care System - Professional grooming, veterinary and boarding services for your beloved pets.">
+    <title><?php echo htmlspecialchars($pageTitle); ?></title>
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-    <!-- Stylesheets -->
-    <link rel="stylesheet" href="<?= $basePath ?>assets/css/common.css">
-
-    <?php if (isset($extraCss)): ?>
-        <?php foreach ((array)$extraCss as $css): ?>
-            <link rel="stylesheet" href="<?= htmlspecialchars($basePath . $css, ENT_QUOTES, 'UTF-8') ?>">
-        <?php endforeach; ?>
-    <?php endif; ?>
+    <!-- Common stylesheet (all members use this) -->
+    <link rel="stylesheet" href="<?php echo $base; ?>assets/css/common.css">
 </head>
 <body>
 
-<!-- ═══════════════════════════════════════════════════════════ HEADER -->
-<header class="site-header" role="banner">
-    <div class="container header-inner">
-
-        <!-- Brand / Logo -->
-        <a href="<?= $basePath ?>index.php" class="site-logo" aria-label="Pet Care System — Home">
-            <span class="logo-icon" aria-hidden="true">🐾</span>
-            <span class="logo-text">Pet<strong>Care</strong></span>
+<!-- ── Main Navigation ──────────────────────────────────── -->
+<header class="site-header">
+    <nav class="navbar">
+        <a href="<?php echo $base; ?>index.php" class="nav-brand">
+            🐾 Pet Care System
         </a>
 
-        <!-- Primary Navigation -->
-        <nav class="site-nav" role="navigation" aria-label="Main navigation">
-            <ul class="nav-list" role="list">
-                <li>
-                    <a href="<?= $basePath ?>index.php"
-                       class="nav-link <?= ($currentScript === 'index.php') ? 'nav-link--active' : '' ?>">
-                        Services
-                    </a>
-                </li>
-                <li>
-                    <a href="<?= $basePath ?>admin/login.php"
-                       class="nav-link <?= ($currentScript === 'login.php') ? 'nav-link--active' : '' ?>">
-                        Admin
-                    </a>
-                </li>
-            </ul>
-        </nav>
-
-        <!-- Mobile hamburger toggle (toggled by catalog.js) -->
-        <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false">
-            <span class="hamburger-bar"></span>
-            <span class="hamburger-bar"></span>
-            <span class="hamburger-bar"></span>
+        <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+            <span></span>
+            <span></span>
+            <span></span>
         </button>
 
-    </div>
+        <ul class="nav-links" id="navLinks">
+            <li>
+                <a href="<?php echo $base; ?>index.php"
+                   class="<?php echo ($currentPage === 'index.php') ? 'active' : ''; ?>">
+                    Home
+                </a>
+            </li>
+            <li>
+                <a href="<?php echo $base; ?>index.php#services"
+                   class="<?php echo ($currentPage === 'service-details.php') ? 'active' : ''; ?>">
+                    Services
+                </a>
+            </li>
+            <li>
+                <a href="<?php echo $base; ?>admin/login.php"
+                   class="<?php echo (strpos($_SERVER['PHP_SELF'], '/admin/') !== false) ? 'active' : ''; ?>">
+                    Admin
+                </a>
+            </li>
+        </ul>
+    </nav>
 </header>
-<!-- ══════════════════════════════════════════════════════════ /HEADER -->
 
-<main id="main-content" role="main">
+<!-- ── Page Content Starts Here ─────────────────────────── -->
+<main class="main-content">
+
+<script>
+    // Mobile navigation toggle
+    document.getElementById('navToggle').addEventListener('click', function () {
+        document.getElementById('navLinks').classList.toggle('open');
+    });
+</script>

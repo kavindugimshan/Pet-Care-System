@@ -1,72 +1,99 @@
 <?php
-/**
- * Shared Helper Functions
- * Pet Care System
- *
- * Reusable utility functions available across all pages.
- * Include via: require_once __DIR__ . '/../includes/functions.php';
- */
+// ============================================================
+// Pet Care System - Shared Helper Functions
+// University Web Application Development Project
+// Member 1: Core Auth
+//
+// Usage: require_once '/path/to/includes/functions.php';
+// ============================================================
 
 /**
- * Format a numeric price value as a Sri Lankan Rupee string.
+ * Sanitize user input to prevent XSS when output in HTML.
+ * Use on any user-supplied string before echoing it to the page.
  *
- * @param  float|int|string $amount  The numeric price value.
- * @return string                    Formatted string, e.g. "Rs. 3,500.00"
+ * @param  string $input  The raw input string.
+ * @return string         HTML-safe string.
  */
-function formatPrice($amount): string
+function sanitizeInput(string $input): string
 {
-    $numeric = is_numeric($amount) ? (float) $amount : 0.0;
-    return 'Rs. ' . number_format($numeric, 2);
+    return htmlspecialchars(trim($input), ENT_QUOTES, 'UTF-8');
 }
 
 /**
- * Sanitize a string for safe HTML output.
- * Trims whitespace and applies htmlspecialchars with UTF-8 encoding.
+ * Format a numeric value as a Sri Lankan Rupee price string.
+ * Example: formatPrice(3500) → "Rs. 3,500.00"
  *
- * @param  string|null $value  The raw input string.
- * @return string              The sanitized string safe for HTML output.
+ * @param  float  $amount  The price amount.
+ * @return string          Formatted price string.
  */
-function sanitize(?string $value): string
+function formatPrice(float $amount): string
 {
-    return htmlspecialchars(trim((string) $value), ENT_QUOTES, 'UTF-8');
+    return 'Rs. ' . number_format($amount, 2);
 }
 
 /**
- * Truncate a string to a maximum number of characters, appending an ellipsis
- * if the original string exceeds the limit.
+ * Redirect to a given URL and stop script execution.
+ * Supports relative paths from the document root.
  *
- * @param  string $text   The input text.
- * @param  int    $limit  Maximum character count (default 120).
+ * @param  string $url  The destination URL or path.
+ * @return void
+ */
+function redirect(string $url): void
+{
+    header('Location: ' . $url);
+    exit();
+}
+
+/**
+ * Return a query-string parameter value safely, or a default.
+ *
+ * @param  string $key      The $_GET key to read.
+ * @param  string $default  Value to return if the key is absent.
  * @return string
  */
-function truncate(string $text, int $limit = 120): string
+function getQueryParam(string $key, string $default = ''): string
 {
-    $text = trim($text);
-    if (mb_strlen($text) <= $limit) {
-        return $text;
-    }
-    return mb_substr($text, 0, $limit) . '…';
+    return isset($_GET[$key]) ? sanitizeInput($_GET[$key]) : $default;
 }
 
 /**
- * Check whether a service image file exists in the assets/images directory.
- * Returns the image path relative to the document root if found,
- * otherwise returns a fallback placeholder path.
+ * Display a session flash message if one is set, then clear it.
+ * Accepts 'success', 'error', or 'info' as the message type.
  *
- * @param  string $imageFilename  Filename stored in services.image column.
- * @param  string $basePath       Document-root-relative base path.
- * @return string                 Path safe for use in <img src="...">.
+ * @param  string $key  The session key that holds the flash message.
+ * @return void
  */
-function resolveServiceImage(string $imageFilename, string $basePath = ''): string
+function showFlash(string $key): void
 {
-    $filename    = basename($imageFilename); // prevent path traversal
-    $relativeSrc = $basePath . 'assets/images/' . $filename;
-    $absolutePath = $_SERVER['DOCUMENT_ROOT'] . '/' . ltrim($relativeSrc, '/');
-
-    if (!empty($filename) && file_exists($absolutePath)) {
-        return $relativeSrc;
+    if (!empty($_SESSION[$key])) {
+        $type    = ($key === 'success') ? 'success' : (($key === 'error') ? 'error' : 'info');
+        $message = sanitizeInput($_SESSION[$key]);
+        echo '<div class="alert alert-' . $type . '">' . $message . '</div>';
+        unset($_SESSION[$key]);
     }
+}
 
-    // Fallback placeholder served locally — no external dependency.
-    return $basePath . 'assets/images/placeholder.svg';
+/**
+ * Check whether the current admin session is active.
+ *
+ * @return bool
+ */
+function isAdminLoggedIn(): bool
+{
+    return isset($_SESSION['admin_id']) && !empty($_SESSION['admin_id']);
+}
+
+/**
+ * Truncate a string to a maximum length and append ellipsis if needed.
+ *
+ * @param  string $text    The input string.
+ * @param  int    $length  Maximum number of characters.
+ * @return string
+ */
+function truncateText(string $text, int $length = 100): string
+{
+    if (mb_strlen($text) <= $length) {
+        return $text;
+    }
+    return mb_substr($text, 0, $length) . '…';
 }
