@@ -8,12 +8,12 @@
 //        Then use $conn for all queries.
 // ============================================================
 
-// ΓöÇΓöÇ Edit these values to match your local environment ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+
 $host        = 'localhost';
 $db_user     = 'root';
 $db_password = 'Awzplocha#2003';
 $db_name     = 'pet_care_system';
-// ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+
 
 // Create the connection
 $conn = new mysqli($host, $db_user, $db_password, $db_name);
