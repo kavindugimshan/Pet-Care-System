@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 // ============================================================
 // Pet Care System - Home Page (Customer Catalog)
 // University Web Application Development Project
@@ -15,7 +15,7 @@ require_once 'includes/header.php';
 
 <div class="container">
     <div class="page-heading text-center" style="padding: var(--space-2xl) 0;">
-        <h1>≡ƒÉ╛ Welcome to Pet Care System</h1>
+        <h1>🐾 Welcome to Pet Care System</h1>
         <p class="text-muted mt-md">
             Professional grooming, veterinary and boarding services for your beloved pets.
         </p>
