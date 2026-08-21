@@ -8,12 +8,12 @@
 //        Then use $conn for all queries.
 // ============================================================
 
-
+// ── Edit these values to match your local environment ──────
 $host        = 'localhost';
 $db_user     = 'root';
-$db_password = '';          // XAMPP default: root has no password
+$db_password = '';        // XAMPP default: root has no password
 $db_name     = 'pet_care_system';
-
+// ───────────────────────────────────────────────────────────
 
 // Create the connection
 $conn = new mysqli($host, $db_user, $db_password, $db_name);
