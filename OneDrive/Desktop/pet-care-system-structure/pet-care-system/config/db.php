@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 // ============================================================
 // Pet Care System - Database Connection
 // University Web Application Development Project
@@ -11,7 +11,7 @@
 
 $host        = 'localhost';
 $db_user     = 'root';
-$db_password = 'Awzplocha#2003';
+$db_password = '517698';
 $db_name     = 'pet_care_system';
 
 
